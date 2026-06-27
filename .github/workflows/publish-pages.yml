@@ -54,6 +54,11 @@ jobs:
           reponame: xlibre
           path: ${{ env.ARCH }}
 
+      - name: Generate LISTING
+        run: |
+          tree -Ffi -I _config.yml -I '_*/' --noreport \
+              | sed -e 's|^\./||g' -e 's|\*$||g' -e '/^$/d' > LISTING
+
       - name: Generate directory index
         uses: gacts/directory-listing@v1
         with:
